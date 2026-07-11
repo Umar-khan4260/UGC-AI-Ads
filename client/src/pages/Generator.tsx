@@ -1,6 +1,13 @@
+import {
+  RectangleVerticalIcon,
+  RectangleHorizontalIcon,
+  Loader2Icon,
+  Wand2Icon,
+} from "lucide-react";
 import Title from "../components/Title";
 import UploadZone from "../components/UploadZone";
 import { useState } from "react";
+import { PrimaryButton } from "../components/Buttons";
 
 const Generator = () => {
   const [name, setName] = useState("");
@@ -28,7 +35,7 @@ const Generator = () => {
 
   return (
     <div className="min-h-screen text-white p-6 md:p-12 mt-28 ">
-      <form onSubmit={handleGenerate} className="max-w-4xl mx-auto md-40">
+      <form onSubmit={handleGenerate} className="max-w-4xl mx-auto mb-40">
         <Title
           heading="Create In-Context Photos"
           description="Upload your model and 
@@ -52,26 +59,112 @@ const Generator = () => {
               onClear={() => setModelImage(null)}
               onChange={(e) => handleFileChange(e, "model")}
             />
-
           </div>
           {/* right colum */}
-          <div className="w-full">
-            <div className="md-4">
-              <label htmlFor="name" className="block text-sm mb-4">Project Name</label>
-              <input type="text" id='name' value={name}
-                onChange={(e) => setName(e.target.value)}  placeholder="Name your project" required className="w-full bg-white/3 rounded-lg broder-2 p-4 text-sm border-violet-200/10 focus:border-violet-500/50 outline-none transition-all" />
+          <div className="w-full ">
+            <div className="mb-4 text-gray-300">
+              <label htmlFor="name" className="block text-sm mb-4">
+                Project Name
+              </label>
+              <input
+                type="text"
+                id="name"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
+                placeholder="Name your project"
+                required
+                className="w-full bg-white/3 rounded-lg broder-2 p-4 text-sm border-violet-200/10 focus:border-violet-500/50 outline-none transition-all"
+              />
+            </div>
+
+            <div className="mb-4 text-gray-300">
+              <label htmlFor="productName" className="block text-sm mb-4">
+                Product Name
+              </label>
+              <input
+                type="text"
+                id="productName"
+                value={productName}
+                onChange={(e) => setProductName(e.target.value)}
+                placeholder="Enter the name of the product"
+                required
+                className="w-full bg-white/3 rounded-lg broder-2 p-4 text-sm border-violet-200/10 focus:border-violet-500/50 outline-none transition-all"
+              />
+            </div>
+
+            <div className="mb-4 text-gray-300">
+              <label
+                htmlFor="productdescription"
+                className="block text-sm mb-4"
+              >
+                Product Description
+                <span className="text-sm text-violet-400">(Optional)</span>
+              </label>
+              <textarea
+                id="productdescription"
+                rows={4}
+                value={productDescription}
+                onChange={(e) => setProductDescription(e.target.value)}
+                placeholder="Enter the description of the product"
+                required
+                className="w-full bg-white/3 rounded-lg broder-2 p-4 text-sm border-violet-200/10 focus:border-violet-500/50 outline-none transition-all"
+              />
             </div>
 
             <div className="md-4 text-gray-300">
-              <label htmlFor="productName" className="block text-sm mb-4">Product Name</label>
-              <input type="text" id='productName' value={productName}
-                onChange={(e) => setProductName(e.target.value)}  placeholder="Enter the name of the product" required className="w-full bg-white/3 rounded-lg broder-2 p-4 text-sm border-violet-200/10 focus:border-violet-500/50 outline-none transition-all" />
+              <label className="block text-sm mb-4">Aspect Ratio</label>
+              <div className="flex gap-3">
+                <RectangleVerticalIcon
+                  onClick={() => setAspectRatio("9:16")}
+                  className={`p-2.5 size-13 bg-white/6 rounded transition-all ring-2 ring-transparent cursor-pointer ${
+                    aspectRatio === "9:16"
+                      ? "ring-violet-500/50 bg-white/10"
+                      : ""
+                  }`}
+                />
+                <RectangleHorizontalIcon
+                  onClick={() => setAspectRatio("16:9")}
+                  className={`p-2.5 size-13 bg-white/6 rounded transition-all ring-2 ring-transparent cursor-pointer ${
+                    aspectRatio === "16:9"
+                      ? "ring-violet-500/50 bg-white/10"
+                      : ""
+                  }`}
+                />
+              </div>
             </div>
 
-              <div className="md-4 text-gray-300">
-              <label htmlFor="productdescription" className="block text-sm mb-4">Product Description <span className="text-sm text-violet-400">(Optional)</span></label>
-              <textarea id='productdescription' value={productDescription}
-                onChange={(e) => setProductDescription(e.target.value)}  placeholder="Enter the description of the product" required className="w-full bg-white/3 rounded-lg broder-2 p-4 text-sm border-violet-200/10 focus:border-violet-500/50 outline-none transition-all" />
+            <div className="md-4 text-gray-300 mt-4">
+              <label htmlFor="userPrompt" className="block text-sm mb-4">
+                User prompt
+                <span className="text-sm text-violet-400">(Optional)</span>
+              </label>
+              <textarea
+                id="userPrompt"
+                rows={4}
+                value={UserPrompt}
+                onChange={(e) => setUserPrompt(e.target.value)}
+                placeholder="Describr how to the naration to be."
+                required
+                className="w-full bg-white/3 rounded-lg broder-2 p-4 text-sm border-violet-200/10 focus:border-violet-500/50 outline-none transition-all"
+              />
+            </div>
+            <div className="justify-center mt-10">
+              <PrimaryButton
+                disabled={isGenerating}
+                className="px-10 py-3 rounded-md disabled:opacity-70 disabled:cursor-not-allowed"
+              >
+                {isGenerating ? (
+                  <>
+                    <Loader2Icon className="size-5 animate-spin" />
+                    Generating...
+                  </>
+                ) : (
+                  <>
+                    <Wand2Icon className="size-5" />
+                    Generate Image
+                  </>
+                )}
+              </PrimaryButton>
             </div>
           </div>
         </div>
