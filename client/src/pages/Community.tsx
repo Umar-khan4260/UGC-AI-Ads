@@ -17,6 +17,7 @@ const Community = () => {
   useEffect(() => {
     fetchProjects();
   }, []);
+
   return loading ? (
     <div className="flex items-center justify-center h-screen">
       <Loader2Icon className="size-7 animate-spin text-indigo-400" />
