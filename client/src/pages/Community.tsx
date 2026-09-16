@@ -3,7 +3,6 @@ import type { Project } from "../types";
 
 import { Loader2Icon } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
-import { tr } from "framer-motion/client";
 import api from "../configs/axios";
 import toast from "react-hot-toast";
 

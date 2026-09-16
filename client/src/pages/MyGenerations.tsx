@@ -2,7 +2,6 @@ import { useEffect, useState } from "react";
 import type { Project } from "../types";
 import { Loader2Icon } from "lucide-react";
 import ProjectCard from "../components/ProjectCard";
-import { div } from "framer-motion/client";
 import { PrimaryButton } from "../components/Buttons";
 import { useAuth, useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";

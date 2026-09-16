@@ -14,7 +14,7 @@ export interface User {
 }
 
 export interface Project {
-  id?: string;
+  id: string;
   name?: string;
   userId?: string;
   // user:User;
@@ -28,7 +28,7 @@ export interface Project {
   isGenerating:boolean;
   isPublished:boolean;
   error?:string;
-  createdAt?:string;
+  createdAt:string;
   updatedAt?:string;
-  uploadedImages?:string[];
+  uploadedImages:string[];
 }

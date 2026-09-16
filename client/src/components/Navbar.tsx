@@ -12,7 +12,6 @@ import { motion } from "framer-motion";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { assets } from "../assets/assets.tsx";
 import { useClerk, useUser, UserButton, useAuth } from "@clerk/clerk-react";
-import { div } from "framer-motion/client";
 import api from "../configs/axios.ts";
 import toast from "react-hot-toast";
 
