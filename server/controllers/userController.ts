@@ -5,14 +5,22 @@ import { prisma } from "../configs/prisma.js";
 //get user credits
 export const getUserCredits = async (req: Request, res: Response) => {
   try {
+    
     const { userId } = req.auth();
-    if (userId) {
+    
+    if (!userId) {
       return res.status(401).json({ message: "Unauthorized" });
     }
 
     const user = await prisma.user.findUnique({
       where: { id: userId },
     });
+
+    if(!user){
+      console.log("user not found")
+    }
+
+    
     res.json({ credits: user?.credits });
   } catch (error: any) {
     Sentry.captureException(error);

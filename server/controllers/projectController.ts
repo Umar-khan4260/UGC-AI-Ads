@@ -38,7 +38,7 @@ export const createProject = async (req: Request, res: Response) => {
 
   const images: any = req.files;
 
-  if (images.length < 2 || productName) {
+  if (!images || images.length < 2 || !productName) {
     res.status(400).json({ message: "Please upload atleast two images" });
   }
 
@@ -117,8 +117,8 @@ export const createProject = async (req: Request, res: Response) => {
     };
 
     //image to base64 structure for ai model
-    const img1base62 = loadImage(images[0].path, images[0].mimeType);
-    const img2base62 = loadImage(images[1].path, images[1].mimeType);
+    const img1base62 = loadImage(images[0].path, images[0].mimetype);
+    const img2base62 = loadImage(images[1].path, images[1].mimetype);
 
     const prompt = {
       text: `Combine te person and product into a realistic photo.
@@ -186,6 +186,7 @@ export const createProject = async (req: Request, res: Response) => {
         data: { credits: { increment: 5 } },
       });
     }
+
     Sentry.captureException(error);
     res.status(500).json({ message: error.message });
   }
